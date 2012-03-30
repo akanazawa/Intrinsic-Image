@@ -146,7 +146,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 
 	if (nlhs>1)
 	{
-		plhs[1] = mxCreateScalarDouble(0.0);
+		plhs[1] = mxCreateDoubleScalar(0.0);
 		PREC *psse = (PREC*)mxGetPr(plhs[1]);
 		psse[0] = sse;
 	}

@@ -22,14 +22,16 @@ CFLAGS=-O3 -ffast-math -fomit-frame-pointer -fPIC -Werror
 #
 # MATLAB
 #	
-MATLABDIR=/usr/pack/matlab-7.10r2010a-sd/
+MATLABDIR=/Applications/MATLAB_R2011b.app
 MATLAB_INCLUDE=-I$(MATLABDIR)/extern/include
 
 #
 # BOOST LIBS (for standalone only)
 #
-BOOST_LIB=-L/scratch_net/biwidl07/opt/boost-1.39.0/lib -lboost_program_options-gcc43-mt -lboost_filesystem-gcc43-mt -lboost_system-gcc43-mt
-BOOST_INCLUDE=-I/kyb/agbs/pgehler/include/boost-1_36/
+BOOST_LIB=-L/usr/local/Cellar/boost/1.49.0/lib -lboost_program_options-mt -lboost_filesystem-mt -lboost_system-mt
+BOOST_INCLUDE=-I/usr/local/Cellar/boost/1.49.0/include/
+# BOOST_LIB=-L/scratch_net/biwidl07/opt/boost-1.39.0/lib -lboost_program_options-gcc43-mt -lboost_filesystem-gcc43-mt -lboost_system-gcc43-mt
+#BOOST_INCLUDE=-I/kyb/agbs/pgehler/include/boost-1_36/
 
 #
 # PYTHON
@@ -47,11 +49,15 @@ NUMPY_INCLUDE=-I/usr/lib/python2.5/site-packages/numpy/core/include
 #MATLAB_LIB=-L$(MATLABDIR)/bin/glnx86 -lmex
 
 # 64 bit
-SUFFIX=mexa64
-MATLAB_LIB=-L$(MATLABDIR)/bin/glnxa64 -lmex
+#SUFFIX=mexa64
+#MATLAB_LIB=-L$(MATLABDIR)/bin/glnxa64 -lmex
 
-#LIBS=/usr/lib/gcc/x86_64-linux-gnu/4.3/libstdc++.a /usr/lib/libm.a
+# 64 bit mac (change by aj)
+SUFFIX=mexmaci64
+MATLAB_LIB=-L$(MATLABDIR)/bin/maci64 -lmex -lmx -lmat
 
+
+LIBS=/usr/lib/libstdc++.dylib /usr/lib/libm.dylib
 
 
 all: standalone matlab libmpikmeans python
@@ -66,7 +72,7 @@ mpi_kmeans.o:	mpi_kmeans.cxx mpi_kmeans.h
 libmpikmeans:	mpi_kmeans.o
 	ar rc libmpikmeans.a mpi_kmeans.o
 	ranlib libmpikmeans.a
-	$(CC) -shared -Wl,-soname=libmpikmeans.so -fPIC $(CFLAGS) $(VERBOSEFLAG) -o libmpikmeans.so $(VERBOSEFLAGS) $(PRECISION) mpi_kmeans.cxx
+	$(CC) -shared -Wl,-install_name,libmpikmeans.so -fPIC $(CFLAGS) $(VERBOSEFLAG) -o libmpikmeans.so $(VERBOSEFLAGS) $(PRECISION) mpi_kmeans.cxx
 
 mpi_kmeans_main.o:	mpi_kmeans_main.cxx
 	$(CC) $(CFLAGS) $(VERBOSEFLAG) $(BOOST_INCLUDE) -c -o mpi_kmeans_main.o mpi_kmeans_main.cxx 
@@ -75,11 +81,13 @@ mpi_assign_main.o:	mpi_assign_main.cxx
 	$(CC) $(CFLAGS) $(VERBOSEFLAG) $(BOOST_INCLUDE) -c -o mpi_assign_main.o mpi_assign_main.cxx 
 
 mpi_kmeans_main:	libmpikmeans mpi_kmeans_main.o
-	$(CC) mpi_kmeans_main.o  $(CFLAGS) $(VERBOSEFLAG) -L/usr/lib/ -static -o mpi_kmeans -lm libmpikmeans.a \
+#removed -static option 
+	$(CC) mpi_kmeans_main.o  $(CFLAGS) $(VERBOSEFLAG) -L/usr/lib/ -o mpi_kmeans -lm libmpikmeans.a \
 		$(BOOST_LIB) $(LIBS)
 
 mpi_assign_main:	libmpikmeans mpi_assign_main.o
-	$(CC) mpi_assign_main.o $(CFLAGS) $(VERBOSEFLAG) -L/usr/lib/ -static -o mpi_assign -lm libmpikmeans.a \
+#removed -static option 
+	$(CC) mpi_assign_main.o $(CFLAGS) $(VERBOSEFLAG) -L/usr/lib/ -o mpi_assign -lm libmpikmeans.a \
 		$(BOOST_LIB) $(LIBS)
 
 %_mex.o:	%_mex.cxx
@@ -87,7 +95,7 @@ mpi_assign_main:	libmpikmeans mpi_assign_main.o
 
 mpi_kmeans_mex.$(SUFFIX):	libmpikmeans mpi_kmeans_mex.o 
 	$(CC) mpi_kmeans_mex.o -shared -o mpi_kmeans_mex.$(SUFFIX) libmpikmeans.a $(MATLAB_LIB) 
-
+#MATLAB_LIB=-L$(MATLABDIR)/bin/maci64 -lmex
 mpi_assign_mex.$(SUFFIX):	libmpikmeans mpi_assign_mex.o
 	$(CC) mpi_assign_mex.o -shared -o mpi_assign_mex.$(SUFFIX) libmpikmeans.a $(MATLAB_LIB)
 

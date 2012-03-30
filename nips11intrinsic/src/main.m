@@ -32,7 +32,12 @@ function [r, estReflectance, estShading] = main()
   [img.diffuse, img.reflectance, img.shading, img.specular, img.mask] = ...
     mitLoad(parameter.img);
 
-  %img.diffuse = img.diffuse(1:10, 1:10, :);
+sfigure(100); 
+subplot(2,2,1);imagesc(img.diffuse); title('original'); axis image;
+subplot(2,2,2);imagesc(img.reflectance); title('Reflectance');axis image;
+subplot(2,2,3);imagesc(img.shading); title('Shading');axis image;
+suplabel('original & ground truth');
+%img.diffuse = img.diffuse(1:10, 1:10, :);
   %img.reflectance = img.reflectance(1:10, 1:10, :);
   %img.shading = img.shading(1:10, 1:10, :);
   %img.mask = img.mask(1:10, 1:10, :);
@@ -48,7 +53,6 @@ function [r, estReflectance, estShading] = main()
   % init the diff operators
   [opts.filterH,opts.filterV] = create4connected_L1(img.sz(1), img.sz(2), ...
     img.mask);
-
   opts.laplacian = create4connected(img.sz(1), img.sz(2), img.mask);
 
   % initialize the energy term stack
@@ -61,9 +65,13 @@ function [r, estReflectance, estShading] = main()
   % the different energy terms stacked upon each other
   if (parameter.c_R ~= 0)
     reflectanceWeights = ones(size(img.mask));
+    fprintf('starting cluster term');
+    tic
     opts.energyStack{end+1} =...
       ClusterTerm(img, parameter, opts, r);
     opts.energyWeights{end+1} = parameter.c_R;
+    toc
+    fprintf('done clusterTerm\n');
   end
 
   if (parameter.c_smooth ~= 0)
@@ -126,6 +134,12 @@ function [r, estReflectance, estShading] = main()
   end
 
   result.r = r;
+  fprintf('END of decomposition (\# iteration=%d)', i);
+  sfigure(200); 
+  subplot(2,2,1);imagesc(img.reflectance); title('Estimated Reflectance');axis image;
+  subplot(2,2,2);imagesc(img.shading); title('Shading');axis image;
+  suplabel(sprintf('Result SSE: %g', result.sse(end)));
+
 
 function [f, df] = objective(r, img, parameter, opts)
   if any(vec(r <= 0))

@@ -46,7 +46,8 @@ function stats = putStats(self, stats)
   stats.nClusters = numel(unique(self.C));
 
 function clusterMean = callClusteringMethod(estDiffuse, k, restarts)
-  clusterMean = mpi_kmeans(estDiffuse', k, 0, restarts);
+% can't build mpi_kmeans in mac os so use vl_feat
+    clusterMean = mpi_kmeans(estDiffuse', k, 0, restarts);
 
 function self = initializeCluster(self, img, parameter, r)
   estDiffuse = bsxfun(@times, self.normedDiffuse, r);

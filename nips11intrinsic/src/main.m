@@ -47,7 +47,6 @@ suplabel('original & ground truth');
   img.diffuse = trimToMask(img.diffuse, img.mask);
   img.norm = sum(img.diffuse, 2);
   img.normedDiffuse = bsxfun(@rdivide, img.diffuse, img.norm);
-
   img.sz = size(img.mask);
 
   % init the diff operators

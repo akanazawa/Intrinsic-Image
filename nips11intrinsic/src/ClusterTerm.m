@@ -4,7 +4,7 @@ function self = ClusterTerm(img, parameter, opts, r)
   self.k = parameter.k;
   self.kMeansRestarts = parameter.kMeansRestarts;
 
-  self.normedDiffuse = img.normedDiffuse;
+  self.normedDiffuse = img.normed;
 
   self = initializeCluster(self, img, parameter, r);
 

@@ -12,7 +12,7 @@ I(I < cut) = cut;
 [m, n, d] = size(I);
 % make I into m*n by d and normalize
 img.mask = ones(m,n);
-img.I2 = trimToMask(I, img.mask);
+img.diffuse = trimToMask(I, img.mask);
 img.norm = sum(img.I2, 2);
 img.normed = bsxfun(@rdivide, img.I2, img.norm); 
 
@@ -56,8 +56,8 @@ end
 lastEnergy = Inf;
 energy = Inf;
 for i=1:parameter.maxIterations
+    fprintf('iteration %d lastE=%g E=%g\n', i, lastEnergy, energy)
     lastEnergy = energy;
-
     % optimize r given split
     r = minimize(r, @objective, ...
                  struct('length', parameter.minimizeMaxIter, 'verbosity', 1), ...

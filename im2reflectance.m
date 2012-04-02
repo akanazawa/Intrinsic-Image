@@ -74,9 +74,9 @@ for i=1:parameter.maxIterations
         opts.energyStack{i} = term.update(term, r);
     end
 
-    estR = insertIntoMask(bsxfun(@times, img.normed, r), ...
-                                    ones(m,n));
-    estL = insertIntoMask(img.norm./r, ones(m,n));
+    estR = insertIntoMask(bsxfun(@times, img.normedDiffuse, r), ...
+                                    img.mask);
+    estL = insertIntoMask(img.norm./r, img.mask);
 
     subplot(2, 2, 1);
     imagesc(insertIntoMask(r, img.mask));

@@ -13,8 +13,9 @@ I(I < cut) = cut;
 % make I into m*n by d and normalize
 img.mask = ones(m,n);
 img.diffuse = trimToMask(I, img.mask);
-img.norm = sum(img.I2, 2);
-img.normed = bsxfun(@rdivide, img.I2, img.norm); 
+img.norm = sum(img.diffuse, 2);
+img.normedDiffuse = bsxfun(@rdivide, img.diffuse, img.norm); 
+img.sz = size(img.mask);
 
 % init the diff operators
 opts = struct();
@@ -104,6 +105,7 @@ estR = r;
 fprintf('END of decomposition (\# iteration=%d)', i);
 
 save(outPath,'estR');
+
 function [f, df] = objective(r, img, parameter, opts)
   if any(vec(r <= 0))
     error('r not positiv');
@@ -130,10 +132,10 @@ function [r] = initializeR(img, parameter)
     r = img.norm;
 
   case 'ones'
-    r = ones(size(img.I2, 1), 1);
+    r = ones(size(img.diffuse, 1), 1);
 
   case 'mixed'
-    r = parameter.startFac * 3*ones(size(img.I2, 1), 1);
+    r = parameter.startFac * 3*ones(size(img.diffuse, 1), 1);
     r = r + (1-parameter.startFac) * img.norm;
 
   otherwise

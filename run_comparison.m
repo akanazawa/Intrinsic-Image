@@ -19,14 +19,21 @@ for i=1:numel(D)
     imPath=fullfile(imgDir,D(i).name);
 
     % 2. compute intrinsic image (Just use reflectance for the moment)
-    albedoPath = fullfile(outDir,[D(i).name(1:end-4) '_albedo.mat']);
-    if ~exist(albedoPath, 'file'), im2reflectance(imPath, albedoPath, ...
-                                                  param); end
-% keyboard
-%     % 1. run Berkeley hierarchical image segmentation (BSR) on the original
-%     segPath = fullfile(outDir,[D(i).name(1:end-4) '_ucm.mat']);
-%     if ~exist(segPath,'file'), im2ucm(imPath, segPath);  end
+    % albedoPath = fullfile(outDir,[D(i).name(1:end-4) '_albedo.mat']);
+    % if ~exist(albedoPath, 'file'), im2reflectance(imPath, albedoPath, ...
+    %                                               param); end
 
+     % 1. run Berkeley hierarchical image segmentation (BSR) on the original
+     % segPath = fullfile(outDir,[D(i).name(1:end-4) '_ucm.mat']);
+     % if ~exist(segPath,'file'), im2ucm(imPath, segPath);  end
+
+     % 1b. run Mean-shift on the original
+     segPath2 = fullfile(outDir,[D(i).name(1:end-4) '_ms.mat']);
+     if ~exist(segPath2,'file')
+         I = im2double(imread(imPath));
+         [fim labels modes regSize] = edison_wrapper(I, @RGB2Lab);  
+         save(segPath2, 'fim', 'labels');
+     end
     
 %     intSegPath = fullfile(outDir,[D(i).name(1:end-4) '_ucmR.mat']);
 %     % 3. re-run BSR on the reflectance image

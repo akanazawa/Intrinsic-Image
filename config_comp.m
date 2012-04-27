@@ -37,3 +37,8 @@ addpath(genpath('nips11intrinsic/'));
  param.c_cret          = 0.01;
  param.thresholdGray   = 0.075;
  param.thresholdColor  = 1;
+
+ %%%%%%%%%%%%%%%%%%%%
+ % Retinex
+ %%%%%%%%%%%%%%%%%%%%
+ param.nIterations = 5;

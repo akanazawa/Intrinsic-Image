@@ -21,8 +21,14 @@ for i=1:numel(D)
 
     % 2. compute intrinsic image (Just use reflectance for the moment)
      albedoPath = fullfile(outDir,[D(i).name(1:end-4) '_albedo.mat']);
-     if ~exist(albedoPath, 'file'), im2reflectance(imPath, albedoPath, ...
-                                                   param); end
+     % if ~exist(albedoPath, 'file'), im2reflectance(imPath, albedoPath, ...
+     %                                               param); end
+     if ~exist(albedoPath, 'file')
+         fprintf('start retinex for %s\n', imPath); 
+         R = im2retinex(imPath, albedoPath, param); 
+         sfigure; subplot(211); imagesc(im2double(imread(imPath)));
+         subplot(212); imagesc(R); title(sprintf('Retinex for %s', D(i).name(1:end-4)));
+     end
 
      % 1. run Berkeley hierarchical image segmentation (BSR) on the original
      % segPath = fullfile(outDir,[D(i).name(1:end-4) '_ucm.mat']);

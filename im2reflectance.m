@@ -77,15 +77,16 @@ for i=1:parameter.maxIterations
     estR = insertIntoMask(bsxfun(@times, img.normedDiffuse, r), ...
                                     img.mask);
     estL = insertIntoMask(img.norm./r, img.mask);
-
+    sfigure(13);
+    suptitle(sprintf('at iteration %d', i));
     subplot(2, 2, 1);
-    imagesc(insertIntoMask(r, img.mask));
-    colorbar;
+    imshow(insertIntoMask(r, img.mask), []);
     subplot(2, 2, 3);
-    image(getNormalized(estR));
+    image(getNormalized(estR)); title('estimated reflectance')
     subplot(2, 2, 4);
     image(getNormalized(repmat(estL, [1, 1, 3])));
-    drawnow;
+    title('estimated shading')
+    %    drawnow;
 
     % result.sse(end+1) = lmse(img.reflectance, img.shading, ...
     %                          estR, estL, 20);

@@ -15,14 +15,14 @@ function [r, estReflectance, estShading] = main()
   parameter.reflectanceInit = 'ones'; % 'ones', 'normI', 'mixed'
   parameter.startFac        = 0.3;     % only valid for 'mixed'
 
-  parameter.c_R             = 1;
+  parameter.c_R             = 0;1;
   parameter.k               = 150;
   parameter.kMeansRestarts  = 4;
   parameter.clusteringInit  = 'RhatR'; % 'RhatR', 'chromaticity', 'normI'
 
-  parameter.c_smooth        = 0.001;
+  parameter.c_smooth        = 0;0.001;
 
-  parameter.c_cret          = 0.01;
+  parameter.c_cret          = 1;%0.01;
   parameter.thresholdGray   = 0.075;
   parameter.thresholdColor  = 1;
 

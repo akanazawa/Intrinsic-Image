@@ -1,2 +1,0 @@
-function N = getNormals(npath)
-

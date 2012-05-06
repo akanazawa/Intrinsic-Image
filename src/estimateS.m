@@ -16,7 +16,7 @@ function [S, R, I] = estimateS(fpath, rpath, npath)
 
 I = im2double(imread(fpath)); % m x n x 3
 r = im2double(imread(rpath)); % m x n
-N = getNormals(npath); % m x n x 3
+N = load(npath); % m x n x 3
 
 assert(size(I) == size(N))
 

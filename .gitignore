@@ -18,6 +18,7 @@ MIT-intrinsic/*/*.png
 
 # emacs stuff
 *.*#
+*.*~
 
 # latex stuff
 *.aux

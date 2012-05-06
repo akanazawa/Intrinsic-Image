@@ -21,7 +21,7 @@
     ne.setInputCloud(cloud);
     ne.compute(*normals);
 
-    pcl::io::savePCDFileASCII("test_norms.pcd", *normals);
+    pcl::io::savePCDFileASCII("norms.pcd", *normals);
     //pcl::io::savePCDFile("normals.pcd", *cloud_normals); 
 
 

@@ -1,7 +1,7 @@
-function convertData(DIR, fpath, npath)
+function convertData(DIR)
 
-depth_file = fullpath(DIR, 'depth.txt');
-normal_file = fullpath(DIR, 'normal.txt');
+depth_file = fullfile(DIR, 'frame.txt');
+normal_file = fullfile(DIR, 'norms.txt');
 
 d_nan = dlmread(depth_file);
 n_nan = dlmread(normal_file);
@@ -29,6 +29,6 @@ c(:,:,1) = uint8(bitand(bitshift(c_pack, -16), uint32(255)))';
 c(:,:,2) = uint8(bitand(bitshift(c_pack, -8), uint32(255)))';
 c(:,:,3) = uint8(bitand(c_pack, uint32(255)))';
 
-imwrite(c, fpath, 'png');
-save(npath, 'n');
-save(fullpath(DIR, 'depth.mat'), 'd');
+imwrite(c, fullfile(DIR, 'img.png'), 'png');
+save(fullfile(DIR, 'normal.mat'), 'n');
+save(fullfile(DIR, 'depth.mat'), 'd');

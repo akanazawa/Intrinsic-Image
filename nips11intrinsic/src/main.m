@@ -31,7 +31,6 @@ function [r, estReflectance, estShading] = main()
   img = struct();
   [img.diffuse, img.reflectance, img.shading, img.specular, img.mask] = ...
     mitLoad(parameter.img);
-
 sfigure(100); 
 subplot(2,2,1);imagesc(img.diffuse); title('original'); axis image;
 subplot(2,2,2);imagesc(img.reflectance); title('Reflectance');axis image;
@@ -136,7 +135,7 @@ suplabel('original & ground truth');
   fprintf('END of decomposition (\# iteration=%d)', i);
   sfigure(200); 
   subplot(2,2,1);imagesc(img.reflectance); title('Estimated Reflectance');axis image;
-  subplot(2,2,2);imagesc(img.shading); title('Shading');axis image;
+  subplot(2,2,2);imshow(img.shading, []); title('Shading');axis image;
   suplabel(sprintf('Result SSE: %g', result.sse(end)));
 
 

@@ -8,7 +8,7 @@ I = imread([imdir,'diffuse.png']);
 R = imread([imdir,'reflectance.png']);
 S = imread([imdir,'shading.png']);
 C = imread([imdir,'specular.png']);
-mask = imread([imdir,'mask.png']);
+mask = ones(size(imread([imdir,'mask.png'])));
 
 I = double(I);
 R = double(R);

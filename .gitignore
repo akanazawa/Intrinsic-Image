@@ -3,6 +3,8 @@
 ### Project Specific ###
 *.tex
 docs/
+data/MITimages/
+MIT-intrinsic/*/*.png
 
 ### Generic Stuff ###
 ## c++ stuff

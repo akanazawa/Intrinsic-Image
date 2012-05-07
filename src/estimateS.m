@@ -59,5 +59,6 @@ subplot(235); imshow(R); title('albedo with normal');
 L = reshape(Lhat, [m n]);
 subplot(236); imshow(L, []); title('shading with normal');
 
+sfigure; imagesc(abs(N)./max(max(max(abs(N))))); title('estimated surface normals');
 keyboard
 

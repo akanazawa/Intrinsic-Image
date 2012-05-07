@@ -2,7 +2,7 @@
 
 ### Project Specific ###
 *.tex
-docs/
+docs/*tex
 data/MITimages/
 MIT-intrinsic/*/*.png
 

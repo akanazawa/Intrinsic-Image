@@ -32,30 +32,32 @@ A = bsxfun(@times, r(:), N2);
 %S1 = linprog([-1,-1,-1], -N2, zeros(m*n, 1), A, I_norm);
 
 % solve 1/2*||Ax-b||^2 s.t. -N*x <= [0..0]
-S2 = lsqlin(A, I_norm, N2, zeros(m*n, 1)); % 3 x 1
+%S2 = lsqlin(A, I_norm, N2, zeros(m*n, 1)); % 3 x 1
 S3 = A\I_norm;
 S = S3;
 %%%%%%%%%% now reestimate R using L = N_i*S
-Lhat = N2*S; % m*n x 1
+Lhat = max(N2*S, 0); % m*n x 1
 rhat = I_norm./Lhat;
 rhat(find(rhat==Inf)) = 0;
-R = reshape(bsxfun(@times, rhat, chromaticity), [m n d]);
-R0 = bsxfun(@rdivide, I, reshape(Lhat, [m n]));
+R0 = reshape(bsxfun(@times, rhat, chromaticity), [m n d]);
+R = bsxfun(@rdivide, I, reshape(Lhat, [m n]));
 
 %%plot
-sfigure; subplot(221); imagesc(I); title('original');
+sfigure; subplot(231); imagesc(I); title('original'); axis off image;
 Rret = reshape(bsxfun(@times, r(:), chromaticity), [m n d]);
 %Lret = I./Rret; % this is color
-Lret = reshape(I_norm./r(:), [m n]);
-subplot(222); imshow(Rret); title('c-retinex albedo');
-subplot(223); imshow(r); title('c-retinex albedo intensity');
-subplot(224); imshow(Lret); title('c-retinex shading');
+%Lret = reshape(I_norm./r(:), [m n]);
+Lret = reshape(mean(I, 3)./r, [m n]);
+%subplot(232); imshow(Rret, []); title('c-retinex albedo');
+subplot(232); imshow(r); title('c-retinex albedo intensity');
+subplot(233); imshow(Lret, []); title('c-retinex shading');
 
-sfigure; subplot(221); imshow(R); title('albedo with normal');
-subplot(222); imshow(reshape(rhat, [m n])); title('albedo intensity');
-L = reshape(Lhat, [m n]);
-subplot(223); imshow(L, []); title('shading with normal');
-subplot(224); sphere; light('Position', S); shading interp;
+subplot(234); sphere; light('Position', S); shading interp;
 title('estimated light source');
+
+subplot(235); imshow(R); title('albedo with normal');
+%subplot(232); imshow(reshape(rhat, [m n])); title('albedo intensity');
+L = reshape(Lhat, [m n]);
+subplot(236); imshow(L, []); title('shading with normal');
 keyboard
 

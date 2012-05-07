@@ -13,6 +13,7 @@ system(sprintf('python ../MIT-intrinsic/retinex_aj.py %s %s',...
 fpath = fullfile(DIR, 'img.png');
 npath = fullfile(DIR, 'normal.mat');
 rpath = fullfile(DIR, 'R.png');
+dpath = fullfile(DIR, 'depth.mat');
 
 estimateS(fpath, rpath, npath);
 

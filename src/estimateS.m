@@ -1,4 +1,4 @@
-function [S, R, I] = estimateS(fpath, rpath, npath)
+function [R, L, N] = estimateS(fpath, rpath, npath)
 %%%%%%%%%%%%%%%%%%%%
 % estimateS.m
 %  given I, R, minimizes I = R*max(N*S, 0)
@@ -38,8 +38,14 @@ S = S3./norm(S3);
 Lhat = max(N2*S, 0); % m*n x 1
 rhat = I_norm./Lhat;
 rhat(find(rhat==Inf)) = 0;
-R0 = reshape(bsxfun(@times, rhat, chromaticity), [m n d]);
-R = bsxfun(@rdivide, I, reshape(Lhat, [m n]));
+R = bsxfun(@times, rhat, chromaticity);
+% make reflectance unit
+R_norm = sqrt(sum(R.^2, 2));
+R = bsxfun(@rdivide, R, R_norm);
+R = reshape(R, [m n d]);
+
+% R = bsxfun(@rdivide, I, reshape(Lhat, [m n]));
+% R(find(R==Inf)) = 0;
 
 %%plot
 sfigure; subplot(231); imagesc(I); title('original'); axis off image;
@@ -60,5 +66,4 @@ L = reshape(Lhat, [m n]);
 subplot(236); imshow(L, []); title('shading with normal');
 
 sfigure; imagesc(abs(N)./max(max(max(abs(N))))); title('estimated surface normals');
-keyboard
 

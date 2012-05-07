@@ -29,6 +29,11 @@ c(:,:,1) = uint8(bitand(bitshift(c_pack, -16), uint32(255)))';
 c(:,:,2) = uint8(bitand(bitshift(c_pack, -8), uint32(255)))';
 c(:,:,3) = uint8(bitand(c_pack, uint32(255)))';
 
+[m n d] = size(c);
+c = c(51:end-50, 51:end-50, :);
+n = n(51:end-50, 51:end-50, :);
+d = d(51:end-50, 51:end-50, :);
+
 imwrite(c, fullfile(DIR, 'img.png'), 'png');
 save(fullfile(DIR, 'normal.mat'), 'n');
 save(fullfile(DIR, 'depth.mat'), 'd');

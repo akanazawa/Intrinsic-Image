@@ -21,7 +21,6 @@ N = N.n;
 assert(all(size(I) == size(N)))
 
 [m, n, d] = size(I);
-%I = imcrop(I, 
 I2 = reshape(I, [m*n, d]); % stacked
 N2 = reshape(N, [m*n, d]);
 
@@ -33,15 +32,15 @@ A = bsxfun(@times, r(:), N2);
 %S1 = linprog([-1,-1,-1], -N2, zeros(m*n, 1), A, I_norm);
 
 % solve 1/2*||Ax-b||^2 s.t. -N*x <= [0..0]
-%S2 = lsqlin(A, I_norm, N2, zeros(m*n, 1)); % 3 x 1
+S2 = lsqlin(A, I_norm, N2, zeros(m*n, 1)); % 3 x 1
 S3 = A\I_norm;
 S = S3;
 %%%%%%%%%% now reestimate R using L = N_i*S
-Lhat = max(N2*S, 0); % m*n x 1
+Lhat = N2*S; % m*n x 1
 rhat = I_norm./Lhat;
 rhat(find(rhat==Inf)) = 0;
 R = reshape(bsxfun(@times, rhat, chromaticity), [m n d]);
-R2 = bsxfun(@rdivide, I, reshape(Lhat, [m n]));
+R0 = bsxfun(@rdivide, I, reshape(Lhat, [m n]));
 
 %%plot
 sfigure; subplot(221); imagesc(I); title('original');
@@ -54,7 +53,8 @@ subplot(224); imshow(Lret); title('c-retinex shading');
 
 sfigure; subplot(221); imshow(R); title('albedo with normal');
 subplot(222); imshow(reshape(rhat, [m n])); title('albedo intensity');
-subplot(223); imshow(reshape(Lhat, [m n])); title('shading with normal');
+L = reshape(Lhat, [m n]);
+subplot(223); imshow(L, []); title('shading with normal');
 subplot(224); sphere; light('Position', S); shading interp;
 title('estimated light source');
 keyboard

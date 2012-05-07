@@ -13,7 +13,6 @@ function [S, R, I] = estimateS(fpath, rpath, npath)
 %   - S: estimated light sources 
 %   - R: refle
 %%%%%%%%%%%%%%%%%%%%
-
 I = im2double(imread(fpath)); % m x n x 3
 r = im2double(imread(rpath)); % m x n
 N = load(npath); % m x n x 3
@@ -24,7 +23,7 @@ assert(all(size(I) == size(N)))
 I2 = reshape(I, [m*n, d]); % stacked
 N2 = reshape(N, [m*n, d]);
 
-I_norm = sum(I2.^2, 2);
+I_norm = sqrt(sum(I2.^2, 2));
 chromaticity = bsxfun(@rdivide, I2, I_norm);
 A = bsxfun(@times, r(:), N2);
 
@@ -34,7 +33,7 @@ A = bsxfun(@times, r(:), N2);
 % solve 1/2*||Ax-b||^2 s.t. -N*x <= [0..0]
 %S2 = lsqlin(A, I_norm, N2, zeros(m*n, 1)); % 3 x 1
 S3 = A\I_norm;
-S = S3;
+S = S3./norm(S3);
 %%%%%%%%%% now reestimate R using L = N_i*S
 Lhat = max(N2*S, 0); % m*n x 1
 rhat = I_norm./Lhat;
@@ -59,5 +58,6 @@ subplot(235); imshow(R); title('albedo with normal');
 %subplot(232); imshow(reshape(rhat, [m n])); title('albedo intensity');
 L = reshape(Lhat, [m n]);
 subplot(236); imshow(L, []); title('shading with normal');
+
 keyboard
 

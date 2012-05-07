@@ -1,5 +1,5 @@
 % take a picture with kinnect, save depth and normal file
-DIR = '../data/pcd_data/frame001';
+DIR = '../data/pcd_data/frame006';
 DIR = '../data/pcd_data/bed';
 % write the RGB to a PNG file
 convertData(DIR);

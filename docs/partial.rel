@@ -1,0 +1,72 @@
+;; RefTeX parse info file
+;; File: /Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex
+;; User: kanazawa (Angjoo Kanazawa)
+
+(set reftex-docstruct-symbol '(
+
+
+(xr nil "\\\\\\\\\\\\")
+
+(index-tags)
+
+(is-multi nil)
+
+(bibview-cache)
+
+(master-dir . "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/")
+
+(label-numbers ("sec:energy-function" . 1) ("eq:" . 7))
+
+(bof "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex")
+
+(toc "toc" "    1 Intrinsic Image Decomposition" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 2 "1" "\\section{Intrinsic Image Decomposition}" 1402)
+
+(toc "toc" "    1 Energy Function" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 2 "1" "\\section{Energy Function}" 2388)
+
+("sec:energy-function" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+("eq:4" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "          1.0.0.1 Shading Prior $E_s$" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 5 "1.0.0.1" "\\paragraph{Shading Prior $E_s$}" 2443)
+
+("eq:1" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "          1.0.0.2 Global Sparse Reflectance Prior" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 5 "1.0.0.2" "\\paragraph{Global Sparse Reflectance Prior}" 2907)
+
+("sec:glob-sparse-refl" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+("eq:2" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "          1.0.0.3 Energy Function" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 5 "1.0.0.3" "\\paragraph{Energy Function}" 3704)
+
+("sec:energy-function-1" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+("eq:3" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "      1.1 Partial Derivatives" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 3 "1.1" "\\subsection{Partial Derivatives}" 3991)
+
+("sec:partial-derivatives" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+("eq:7" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+("eq:6" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "      1.2 Another derivation of the intrinsic image model" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 3 "1.2" "\\subsection{Another derivation of the intrinsic image model}" 5665)
+
+("sec:anoth-deriv-intr" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "          1.2.0.1 Single Light Source" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 5 "1.2.0.1" "\\paragraph{Single Light Source}" 6922)
+
+("sec:single-light-source" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "          1.2.0.2 Multiple Light Source" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 5 "1.2.0.2" "\\paragraph{Multiple Light Source}" 7598)
+
+("sec:mult-light-source" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+("eq:5" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil "")
+
+(toc "toc" "    1 Energy Function" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex" nil 2 "1" "\\section{Energy Function}" 2388)
+
+(eof "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/partial.tex")
+))
+

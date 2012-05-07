@@ -1,0 +1,82 @@
+;; RefTeX parse info file
+;; File: /Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex
+;; User: kanazawa (Angjoo Kanazawa)
+
+(set reftex-docstruct-symbol '(
+
+
+(xr nil "\\\\\\\\\\\\")
+
+(index-tags)
+
+(is-multi nil)
+
+(bibview-cache)
+
+(master-dir . "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/")
+
+(label-numbers ("eq:" . 7))
+
+(bof "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex")
+
+(toc "toc" "    1 Intrinsic Image Decomposition" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 2 "1" "\\section{Intrinsic Image Decomposition}" 1408)
+
+(toc "toc" "      1.1 Intrinsic Image Model with Normals" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 3 "1.1" "\\subsection{Intrinsic Image Model with Normals}" 2549)
+
+("sec:intr-image-model" "s" "We assume constant light ($C=(1,1,1)^T$) through out the rest of the paper unless otherwise noted. W" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+("eq:3" "e" "I_i = R_i max(N_i\\cdot S, 0) " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+("eq:2" "e" "" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" "LOST LABEL.  RESCAN TO FIX.")
+
+("eq:4" "e" "I_i = r_i \\frac{I_i}{\\norm{I_i}} (N_i\\cdot S) " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil)
+
+(toc "toc" "    2 Allowing Multiple Light Sources" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 2 "2" "\\section{Allowing Multiple Light Sources}" 3069)
+
+("sec:anoth-deriv-intr" "s" "Assuming distant light sources, the lambertian reflectance function describes the shading of a surfa" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil)
+
+("eq:1" "e" "L_i = \\sum_{j=1}^k max(N_i\\cdot S_j, 0) " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+("eq:5" "e" "I_i = R_i \\sum_{j=1}^k max(N_i\\cdot S_j, 0) " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "    3 Experiments with Single Light Source" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 2 "3" "\\section{Experiments with Single Light Source}" 3586)
+
+("sec:exper-with-single" "s" "To evaluate \\ref Color-retinex method was evaluated as the best method that only uses single image i" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "          3.0.0.1 Initializing Albedo" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "3.0.0.1" "\\paragraph{Initializing Albedo}" 4126)
+
+("sec:initializing-albedo" "s" "Color-retinex method was evaluated as the best method that only uses single image in the baseline ev" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "          3.0.0.2 Solving for $S$" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "3.0.0.2" "\\paragraph{Solving for $S$}" 4785)
+
+("sec:solving-s" "s" "Using the Color-retinex method, we obtain our initial estimate for $R$. Then we enforce the delta-pr" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+("eq:6" "e" "1/2||\\norm{I_i} - (r_iN_i)\\cdot S||^2 s.t. N_i\\cdot S \\ge 0 " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "          3.0.0.3 Re-estimating albedo" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "3.0.0.3" "\\paragraph{Re-estimating albedo}" 5563)
+
+("sec:re-estimating-albedo" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+("eq:7" "e" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "    4 Experimental Results" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 2 "4" "\\section{Experimental Results}" 5867)
+
+("sec:experimental-results" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "          4.0.0.1 Obtaining Normals" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "4.0.0.1" "\\paragraph{Obtaining Normals}" 5932)
+
+("sec:obtaining-normals" "s" nil "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil "")
+
+(toc "toc" "          2.0.0.1 Single Light Source" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "2.0.0.1" "\\paragraph{Single Light Source}" 3586)
+
+("sec:single-light-source" "s" "Under the single light source assumption, the intrinsic image model with normals is $$I_i = R_i \\cdo" "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil)
+
+(toc "toc" "          2.0.0.2  " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "2.0.0.2" "\\paragraph{}" 6011)
+
+(toc "toc" "          2.0.0.2  " "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex" nil 5 "2.0.0.2" "\\paragraph{}" 6011)
+
+(bib "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/reference.bib")
+
+(eof "/Users/kanazawa/Documents/github/Intrinsic-Image/docs/firstwriteup.tex")
+))
+

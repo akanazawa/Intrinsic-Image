@@ -1,5 +1,5 @@
 % take a picture with kinnect, save depth and normal file
-DIR = '../data/pcd_data/frame001';
+DIR = '../data/pcd_data/frame006';
 DIR = '../data/pcd_data/bed';
 % write the RGB to a PNG file
 convertData(DIR);
@@ -33,22 +33,24 @@ Rret = reshape(bsxfun(@times, r(:), chromaticity), [m n d]);
 addpath(genpath('../edison/'));
 
 
-[fim0 labels0 modes0 regSize0] = edison_wrapper(I, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 75);  
+[fim0 labels0 modes0 regSize0] = edison_wrapper(I, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 100);  
 fim0 = Luv2RGB(fim0);
-[fim1 labels1 modes1 regSize1] = edison_wrapper(Rret, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 75);  
+[fim1 labels1 modes1 regSize1] = edison_wrapper(Rret, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 100);  
 fim1 = Luv2RGB(fim1);
 
-% R2 = reshape(R, [m*n, d]);
-% R2_norm = sqrt(sum(R2.^2, 2));
-% R2 = bsxfun(@rdivide, R2, R2_norm);
-% Runit = reshape(R2, [m n d]);
+R2 = reshape(R, [m*n, d]);
+R2max = max(R2);
+R2_norm = sqrt(sum(R2.^2, 2));
+R2 = bsxfun(@rdivide, R2, R2_norm);
+Runit = reshape(R2, [m n d]);
 
-[fim labels modes regSize] = edison_wrapper(Runit, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 75);  
+[fim labels modes regSize] = edison_wrapper(R, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 100);  
 fim = Luv2RGB(fim);
 
-sfigure; subplot(221); imagesc(fim0); axis off image;
+sfigure; subplot(131); imagesc(fim0); axis off image;
 title('segmentation on original');
-subplot(222); imagesc(fim1);axis off image;
+subplot(132); imagesc(fim1);axis off image;
 title('segmentation on color-retinex');
-subplot(223); imagesc(fim);axis off image;
+subplot(133); imagesc(fim);axis off image;
 title('segmentation on our reflectance');
+suptitle('mean-shift results');

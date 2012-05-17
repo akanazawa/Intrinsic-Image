@@ -13,8 +13,11 @@ fpath = fullfile(DIR, 'img.png');
 npath = fullfile(DIR, 'normal.mat');
 rpath = fullfile(DIR, 'R.png');
 dpath = fullfile(DIR, 'depth.mat');
-
-[R, L, N] = estimateS(fpath, rpath, npath);
+I = im2double(imread(fpath));
+r = im2double(imread(rpath));
+N = load(npath);
+N = N.n;
+[R, L, N] = estimateS(I, r, N);
 albedoPath = fullfile(DIR, 'Rfinal.png') 
 imwrite(R, albedoPath, 'png');
 %imwrite(L, fullfile(DIR, 'Lfinal.png'));

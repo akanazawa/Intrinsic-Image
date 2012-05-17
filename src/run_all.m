@@ -1,5 +1,5 @@
 % take a picture with kinnect, save depth and normal file
-DIR = '../data/pcd_data/frame006';
+DIR = '../data/pcd_data/frame004';
 DIR = '../data/pcd_data/bed';
 % write the RGB to a PNG file
 convertData(DIR);
@@ -38,13 +38,11 @@ fim0 = Luv2RGB(fim0);
 [fim1 labels1 modes1 regSize1] = edison_wrapper(Rret, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 100);  
 fim1 = Luv2RGB(fim1);
 
-R2 = reshape(R, [m*n, d]);
-R2max = max(R2);
-R2_norm = sqrt(sum(R2.^2, 2));
-R2 = bsxfun(@rdivide, R2, R2_norm);
-Runit = reshape(R2, [m n d]);
+R2 = R(:);
+R2(find(R2 >=1)) = 1;
+R2 = reshape(R2, [m n d]);
 
-[fim labels modes regSize] = edison_wrapper(R, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 100);  
+[fim labels modes regSize] = edison_wrapper(R2, @RGB2Luv, 'SpatialBandWidth', 15, 'MinimumRegionArea', 100);  
 fim = Luv2RGB(fim);
 
 sfigure; subplot(131); imagesc(fim0); axis off image;
